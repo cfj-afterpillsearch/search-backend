@@ -1,0 +1,404 @@
+openapi: 3.0.3
+info:
+  title: afterpill-search-api
+  description: アフターピル検索API
+  version: 1.0.0
+  contact:
+    name: Code for Japan - afterpill-search
+    email: inudog4649111@gmail.com
+    url: 'https://www.notion.so/code4japan-community/7445736c87314fddbf411b5db49d54a8'
+servers:
+  - url: 'http://localhost:3000'
+    description: 開発環境
+paths:
+  '/api/search/medical-institutions?latitude={latitude}&longitude={longitude}':
+    get:
+      tags:
+        - 医療機関検索
+      description: 医療機関-現在地検索
+      operationId: MedicalInstitutionSearch-CurrentLocation
+
+      parameters:
+        - $ref: '#/components/parameters/latitude'
+        - $ref: '#/components/parameters/longitude'
+        - $ref: '#/components/parameters/pagination_page'
+
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                description: 医療機関-現在地検索の結果
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - $ref: '#/components/schemas/MetaInfo_CurrentLocaiton'
+                  - $ref: '#/components/schemas/MedicalInstitution'
+              examples:
+                医療機関-現在地検索の結果:
+                  value:
+                    meta:
+                      itemsPerPage: 100
+                      totalItems: 1
+                      currentPage: 1
+                      totalPages: 1
+                      searchType: current_location
+                      latitude: 35.681236
+                      longitude: 139.767125
+                      address_todohuken: '東京都'
+                      address_shikuchoson: '町田市'
+                    links:
+                      current: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      next: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      last: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                    results:
+                      [
+                        {
+                          name: '町田東口クリニック',
+                          postalcode: '194-0022',
+                          address: '町田市森野1-35-8 ヴィンテージ2 3F',
+                          tel: '042-721-8855',
+                          url: 'https://www.machida-higashiguchi-clinic.com/clinic',
+                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30
+土・日・祝 10：-12：30 13：30-16：00',
+                        }
+                      ]
+
+        '400':
+          description: リクエストが不正
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  '/api/search/medical-institutions?todofuken={todofuken}&shikuchoson={shikuchoson}':
+    get:
+      tags:
+        - 医療機関検索
+      description: 医療機関-住所検索
+      operationId: MedicalInstitutionSearch-Address
+
+      parameters:
+        - in: query
+          name: todofuken
+          schema:
+            type: string
+          description: 検索したい都道府県
+          example: '東京都'
+          required: true
+        - in: query
+          name: shikuchoson
+          schema:
+            type: string
+          description: 検索したい市区町村
+          example: '町田市'
+        - $ref: '#/components/parameters/pagination_page'
+
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                description: 医療機関-住所検索の結果
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - $ref: '#/components/schemas/MetaInfo_Address'
+                  - $ref: '#/components/schemas/MedicalInstitution'
+              examples:
+                医療機関-住所検索の結果:
+                  value:
+                    meta:
+                      itemsPerPage: 100
+                      totalItems: 1
+                      currentPage: 1
+                      totalPages: 1
+                      searchType: address
+                      address_todohuken: '東京都'
+                      address_shikuchoson: '町田市'
+                    links:
+                      current: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      next: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      last: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                    results:
+                      [
+                        {
+                          name: '医療法人社団　東京医科大学',
+                          postalcode: '113-8519',
+                          address: '東京都文京区本郷7-3-1',
+                          tel: '03-5803-1111',
+                          url: 'https://www.tokyo-med.ac.jp/',
+                          memo_available_time: '平日9:00-17:00',
+
+                        }
+                      ]
+
+        '400':
+          description: リクエストが不正
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  '/api/search/pharmacy?latitude={latitude}&longitude={longitude}':
+    get:
+      tags:
+        - 薬局検索
+      description: 薬局-現在地検索
+      operationId: PharmacySearch-CurrentLocation
+
+      parameters:
+        - $ref: '#/components/parameters/latitude'
+        - $ref: '#/components/parameters/longitude'
+        - $ref: '#/components/parameters/pagination_page'
+
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                description: 薬局-現在地検索の結果
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - $ref: '#/components/schemas/MetaInfo_CurrentLocaiton'
+                  - $ref: '#/components/schemas/Pharmacy'
+              examples:
+                薬局-現在地検索の結果:
+                  value:
+                    meta:
+                      itemsPerPage: 100
+                      totalItems: 1
+                      currentPage: 1
+                      totalPages: 1
+                      searchType: current_location
+                      latitude: 35.681236
+                      longitude: 139.767125
+                      address_todohuken: '東京都'
+                      address_shikuchoson: '町田市'
+                    links:
+                      current: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      next: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      last: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                    results:
+                      [
+                        {
+                          name: '町田東口クリニック',
+                          postalcode: '194-0022',
+                          address: '町田市森野1-35-8 ヴィンテージ2 3F',
+                          tel: '042-721-8855',
+                          url: 'https://www.machida-higashiguchi-clinic.com/clinic',
+                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30土・日・祝 10：-12：30 13：30-16：00',
+                        }
+                      ]
+
+        '400':
+          description: リクエストが不正
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  '/api/search/pharmacy?todofuken={todofuken}&shikuchoson={shikuchoson}':
+    get:
+      tags:
+        - 薬局検索
+      description: 薬局-住所検索
+      operationId: MedicalInstitutionSearch-Address
+
+      parameters:
+        - in: query
+          name: todofuken
+          schema:
+            type: string
+          description: 検索したい都道府県
+          example: '東京都'
+          required: true
+        - in: query
+          name: shikuchoson
+          schema:
+            type: string
+          description: 検索したい市区町村
+          example: '町田市'
+        - $ref: '#/components/parameters/pagination_page'
+
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                description: 薬局-住所検索の結果
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - $ref: '#/components/schemas/MetaInfo_Address'
+                  - $ref: '#/components/schemas/Pharmacy'
+              examples:
+                薬局-住所検索の結果:
+                  value:
+                    meta:
+                      itemsPerPage: 100
+                      totalItems: 1
+                      currentPage: 1
+                      totalPages: 1
+                      searchType: address
+                      address_todohuken: '東京都'
+                      address_shikuchoson: '町田市'
+                    links:
+                      current: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      next: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      last: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                    results:
+                      [
+                        {
+                          name: '医療法人社団　東京医科大学',
+                          postalcode: '113-8519',
+                          address: '東京都文京区本郷7-3-1',
+                          tel: '03-5803-1111',
+                          url: 'https://www.tokyo-med.ac.jp/',
+                          memo_available_time: '平日9:00-17:00',
+
+                        }
+                      ]
+
+        '400':
+          description: リクエストが不正
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  parameters:
+    latitude:
+      name: latitude
+      in: query
+      description: 現在地検索を行う地点の緯度
+      example: 35.542143
+      required: true
+      schema:
+        type: number
+    longitude:
+      name: longitude
+      in: query
+      description: 現在地検索を行う地点の経度
+      example: 139.445131
+      required: true
+      schema:
+        type: number
+
+    pagination_page:
+      name: page
+      in: query
+      description: 表示したいページ数
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+  schemas:
+    MetaInfo_CurrentLocaiton:
+      description: 現在地検索の検索地点の情報
+      properties:
+        meta:
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+            address_todohuken:
+              type: string
+            address_shikuchoson:
+              type: string
+
+    MetaInfo_Address:
+      description: 住所検索の情報
+      properties:
+        meta:
+          properties:
+            address_todohuken:
+              type: string
+            address_shikuchoson:
+              type: string
+
+    Pagination:
+      type: object
+      description: ページネーション
+      properties:
+        meta:
+          description: ページネーションの情報
+          properties:
+            itemsPerPage:
+              type: integer
+            totalItems:
+              type: integer
+            currentPage:
+              type: integer
+            totalPages:
+              type: integer
+            searchType:
+              enum:
+                - current_location
+                - address
+        links:
+          description: ページネーションのリンク
+          properties:
+            current:
+              type: string
+            first:
+              type: string
+            prev:
+              type: string
+            next:
+              type: string
+            last:
+              type: string
+
+        results:
+          description: データの配列
+          type: array
+
+
+    MedicalInstitution:
+      description: 医療機関の情報
+      properties:
+        results:
+          type: array
+          items:
+            name:
+              type: string
+            postalcode:
+              type: string
+            address:
+              type: string
+            tel:
+              type: string
+            url:
+              type: string
+            memo_available_time:
+              type: string
+
+    Pharmacy:
+      description: 薬局の情報
+      properties:
+        results:
+          type: array
+          items: [ ]
+
+    Error:
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
