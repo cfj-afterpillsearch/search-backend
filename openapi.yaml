@@ -11,7 +11,7 @@ servers:
   - url: 'http://localhost:3000'
     description: 開発環境
 paths:
-  '/api/search/medical-institutions?latitude={latitude}&longitude={longitude}':
+  '/api/v1/search/medical-institutions?latitude={latitude}&longitude={longitude}':
     get:
       tags:
         - 医療機関検索
@@ -73,7 +73,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  '/api/search/medical-institutions?todofuken={todofuken}&shikuchoson={shikuchoson}':
+  '/api/v1/search/medical-institutions?todofuken={todofuken}&shikuchoson={shikuchoson}':
     get:
       tags:
         - 医療機関検索
@@ -145,7 +145,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 
-  '/api/search/pharmacy?latitude={latitude}&longitude={longitude}':
+  '/api/v1/search/pharmacy?latitude={latitude}&longitude={longitude}':
     get:
       tags:
         - 薬局検索
@@ -206,7 +206,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  '/api/search/pharmacy?todofuken={todofuken}&shikuchoson={shikuchoson}':
+  '/api/v1/search/pharmacy?todofuken={todofuken}&shikuchoson={shikuchoson}':
     get:
       tags:
         - 薬局検索
