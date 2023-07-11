@@ -8,10 +8,10 @@ info:
     email: inudog4649111@gmail.com
     url: 'https://www.notion.so/code4japan-community/7445736c87314fddbf411b5db49d54a8'
 servers:
-  - url: 'http://localhost:3000'
+  - url: ''
     description: 開発環境
 paths:
-  '/api/v1/search/medical-institutions?latitude={latitude}&longitude={longitude}':
+  '/api/v1/search/current-location/medical-institutions':
     get:
       tags:
         - 医療機関検索
@@ -48,11 +48,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      next: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -73,7 +73,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  '/api/v1/search/medical-institutions?todofuken={todofuken}&shikuchoson={shikuchoson}':
+  '/api/v1/search/address/medical-institutions':
     get:
       tags:
         - 医療機関検索
@@ -119,11 +119,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      next: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -145,7 +145,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 
-  '/api/v1/search/pharmacy?latitude={latitude}&longitude={longitude}':
+  'api/v1/search/current-location/pharmacies':
     get:
       tags:
         - 薬局検索
@@ -182,11 +182,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      next: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -206,7 +206,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  '/api/v1/search/pharmacy?todofuken={todofuken}&shikuchoson={shikuchoson}':
+  '/api/v1/search/address/pharmacies':
     get:
       tags:
         - 薬局検索
@@ -252,11 +252,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      next: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
