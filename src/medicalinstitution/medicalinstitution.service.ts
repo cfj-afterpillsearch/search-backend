@@ -11,7 +11,6 @@ export class MedicalinstitutionService {
   ) {}
 
   async searchMedicalInstitution(latitude: number, longitude: number) {
-    console.log('Service: ', latitude, longitude);
     const result = await this.miService
       .aggregate([
         {
