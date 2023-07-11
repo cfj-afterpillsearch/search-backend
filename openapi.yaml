@@ -50,8 +50,8 @@ paths:
                     links:
                       current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                       first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      prev: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      next: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
                       last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
@@ -61,8 +61,11 @@ paths:
                           address: '町田市森野1-35-8 ヴィンテージ2 3F',
                           tel: '042-721-8855',
                           url: 'https://www.machida-higashiguchi-clinic.com/clinic',
-                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30
-土・日・祝 10：-12：30 13：30-16：00',
+                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30 土・日・祝 10：-12：30 13：30-16：00',
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -121,8 +124,8 @@ paths:
                     links:
                       current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                       first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      prev: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      next: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
                       last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
@@ -133,7 +136,10 @@ paths:
                           tel: '03-5803-1111',
                           url: 'https://www.tokyo-med.ac.jp/',
                           memo_available_time: '平日9:00-17:00',
-
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -184,8 +190,8 @@ paths:
                     links:
                       current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                       first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      prev: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      next: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
                       last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
@@ -196,6 +202,10 @@ paths:
                           tel: '042-721-8855',
                           url: 'https://www.machida-higashiguchi-clinic.com/clinic',
                           memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30土・日・祝 10：-12：30 13：30-16：00',
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -254,8 +264,8 @@ paths:
                     links:
                       current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                       first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      prev: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      next: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
                       last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
@@ -266,7 +276,10 @@ paths:
                           tel: '03-5803-1111',
                           url: 'https://www.tokyo-med.ac.jp/',
                           memo_available_time: '平日9:00-17:00',
-
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -387,6 +400,13 @@ components:
               type: string
             memo_available_time:
               type: string
+            location:
+              type: object
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
 
     Pharmacy:
       description: 薬局の情報
