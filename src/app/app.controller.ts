@@ -17,7 +17,7 @@ export class AppController {
   ) {}
 
   @Get('/api/v1/search/current-location/medical-institutions')
-  async searchMedicalInstitution(
+  async searchMedicalInstitution_currentsearch(
     @Query('latitude', ParseFloatPipe) latitude: number,
     @Query('longitude', ParseFloatPipe) longitude: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
@@ -27,12 +27,12 @@ export class AppController {
     const { todofuken, shikuchoson } =
       await this.googleGeocodeService.getAddress(latitude, longitude);
 
-    const result = await this.miService.searchMedicalInstitution(
+    const records = await this.miService.searchMedicalInstitution(
       latitude,
       longitude,
     );
 
-    const totalItems = result.length;
+    const totalItems = records.length;
 
     // pageパラメータが不正な場合は、1ページ目を返す。 TODO: Pipeで実装する
     if (page < 1 || page > Math.ceil(totalItems / itemsPerPage)) {
@@ -72,7 +72,7 @@ export class AppController {
           : null,
       last: `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}&page=${meta.totalPages}`,
     };
-    const results = result
+    const results = records
       .slice(
         (page - 1) * itemsPerPage,
         (page - 1) * itemsPerPage + itemsPerPage,
