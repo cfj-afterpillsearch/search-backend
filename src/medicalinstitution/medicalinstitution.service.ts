@@ -10,7 +10,7 @@ export class MedicalinstitutionService {
     private readonly miService: Collection<MedicalinstitutionStoreModel>,
   ) {}
 
-  async searchMedicalInstitution(latitude: number, longitude: number) {
+  async searchFromCurrentLocation(latitude: number, longitude: number) {
     const result = await this.miService
       .aggregate([
         {
@@ -26,6 +26,16 @@ export class MedicalinstitutionService {
         },
       ])
       .toArray();
+    return result;
+  }
+
+  async searchFromAddress(todofuken: string, shikuchoson: string) {
+    const query =
+      shikuchoson === ''
+        ? { address_todofuken: todofuken }
+        : { address_todofuken: todofuken, address_shikuchoson: shikuchoson };
+
+    const result = await this.miService.find(query).toArray();
     return result;
   }
 }
