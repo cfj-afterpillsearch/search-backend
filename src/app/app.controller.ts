@@ -6,10 +6,13 @@ import {
   ParseFloatPipe,
   ParseIntPipe,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { GoogleGeocodingService } from '../google-geocoding/google-geocoding.service';
 import { MedicalinstitutionService } from 'src/medicalinstitution/medicalinstitution.service';
+import { SearchInterceptor } from 'src/intercepter/search/search.interceptor';
 
+@UseInterceptors(SearchInterceptor)
 @Controller()
 export class AppController {
   constructor(

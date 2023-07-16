@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { GoogleGeocodingModule } from '../google-geocoding/google-geocoding.module';
 import { MedicalinstitutionModule } from 'src/medicalinstitution/medicalinstitution.module';
+import { StatisticsModule } from 'src/statistics/statistics.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { MedicalinstitutionModule } from 'src/medicalinstitution/medicalinstitut
     }),
     GoogleGeocodingModule,
     MedicalinstitutionModule,
+    StatisticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
