@@ -90,7 +90,7 @@ export class AppController {
           address: item.address,
           tel: item.phone,
           url: item.website,
-          memo_available_time: item.available_date,
+          memo_openinghours: item.openinghours,
           location: {
             lat: item.location.coordinates[1],
             lng: item.location.coordinates[0],
@@ -168,7 +168,7 @@ export class AppController {
           address: item.address,
           tel: item.phone,
           url: item.website,
-          memo_available_time: item.available_date,
+          memo_openinghours: item.openinghours,
           location: {
             lat: item.location.coordinates[1],
             lng: item.location.coordinates[0],
@@ -246,7 +246,7 @@ export class AppController {
           postalcode: item.postalcode,
           address: item.address,
           tel: item.phone,
-          memo_available_time: item.openinghours,
+          memo_openinghours: item.openinghours,
           emergency_contact: item.emergency_contact,
           emergency_contact_phone: item.emergency_contact_phone,
           location: {
@@ -325,7 +325,7 @@ export class AppController {
           postalcode: item.postalcode,
           address: item.address,
           tel: item.phone,
-          memo_available_time: item.openinghours,
+          memo_openinghours: item.openinghours,
           emergency_contact: item.emergency_contact,
           emergency_contact_phone: item.emergency_contact_phone,
           location: {

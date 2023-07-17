@@ -61,7 +61,7 @@ paths:
                           address: '町田市森野1-35-8 ヴィンテージ2 3F',
                           tel: '042-721-8855',
                           url: 'https://www.machida-higashiguchi-clinic.com/clinic',
-                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30 土・日・祝 10：-12：30 13：30-16：00',
+                          memo_openinghours: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30 土・日・祝 10：-12：30 13：30-16：00',
                           location: {
                             latitude: 35.707771,
                             longitude: 139.762519
@@ -135,7 +135,7 @@ paths:
                           address: '東京都文京区本郷7-3-1',
                           tel: '03-5803-1111',
                           url: 'https://www.tokyo-med.ac.jp/',
-                          memo_available_time: '平日9:00-17:00',
+                          memo_openinghours: '平日9:00-17:00',
                           location: {
                             latitude: 35.707771,
                             longitude: 139.762519
@@ -200,8 +200,9 @@ paths:
                           postalcode: '194-0022',
                           address: '町田市森野1-35-8 ヴィンテージ2 3F',
                           tel: '042-721-8855',
-                          url: 'https://www.machida-higashiguchi-clinic.com/clinic',
-                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30土・日・祝 10：-12：30 13：30-16：00',
+                          memo_openinghours: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30土・日・祝 10：-12：30 13：30-16：00',
+                          emergency_contact: '有',
+                          emergency_contact_phone: '03-5803-1111',
                           location: {
                             latitude: 35.707771,
                             longitude: 139.762519
@@ -275,7 +276,9 @@ paths:
                           address: '東京都文京区本郷7-3-1',
                           tel: '03-5803-1111',
                           url: 'https://www.tokyo-med.ac.jp/',
-                          memo_available_time: '平日9:00-17:00',
+                          memo_openinghours: '平日9:00-17:00',
+                          emergency_contact: '有',
+                          emergency_contact_phone: '03-5803-1111',
                           location: {
                             latitude: 35.707771,
                             longitude: 139.762519
@@ -398,7 +401,7 @@ components:
               type: string
             url:
               type: string
-            memo_available_time:
+            memo_openinghours:
               type: string
             location:
               type: object
@@ -413,7 +416,28 @@ components:
       properties:
         results:
           type: array
-          items: [ ]
+          items:
+            name:
+              type: string
+            postalcode:
+              type: string
+            address:
+              type: string
+            tel:
+              type: string
+            memo_openinghours:
+              type: string
+            emergency_contact:
+              type: string
+            emergency_contact_phone:
+              type: string
+            location:
+              type: object
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
 
     Error:
       properties:

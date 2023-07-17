@@ -11,7 +11,7 @@ export interface MedicalinstitutionStoreModel {
   shikuchosonCode: string;
   phone: string;
   website: string;
-  available_date: string;
+  openinghours: string;
   location: {
     type: 'Point';
     coordinates: number[];
