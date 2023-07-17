@@ -8,10 +8,10 @@ info:
     email: inudog4649111@gmail.com
     url: 'https://www.notion.so/code4japan-community/7445736c87314fddbf411b5db49d54a8'
 servers:
-  - url: 'http://localhost:3000'
+  - url: ''
     description: 開発環境
 paths:
-  '/api/search/medical-institutions?latitude={latitude}&longitude={longitude}':
+  '/api/v1/search/current-location/medical-institutions':
     get:
       tags:
         - 医療機関検索
@@ -48,11 +48,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
+                      last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -61,8 +61,11 @@ paths:
                           address: '町田市森野1-35-8 ヴィンテージ2 3F',
                           tel: '042-721-8855',
                           url: 'https://www.machida-higashiguchi-clinic.com/clinic',
-                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30
-土・日・祝 10：-12：30 13：30-16：00',
+                          memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30 土・日・祝 10：-12：30 13：30-16：00',
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -73,7 +76,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  '/api/search/medical-institutions?todofuken={todofuken}&shikuchoson={shikuchoson}':
+  '/api/v1/search/address/medical-institutions':
     get:
       tags:
         - 医療機関検索
@@ -119,11 +122,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
+                      last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -133,7 +136,10 @@ paths:
                           tel: '03-5803-1111',
                           url: 'https://www.tokyo-med.ac.jp/',
                           memo_available_time: '平日9:00-17:00',
-
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -145,7 +151,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 
-  '/api/search/pharmacy?latitude={latitude}&longitude={longitude}':
+  'api/v1/search/current-location/pharmacies':
     get:
       tags:
         - 薬局検索
@@ -182,11 +188,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
+                      last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -196,6 +202,10 @@ paths:
                           tel: '042-721-8855',
                           url: 'https://www.machida-higashiguchi-clinic.com/clinic',
                           memo_available_time: '月・火・木 10：00-12：30 16：00-20：30金 15：00-20：30土・日・祝 10：-12：30 13：30-16：00',
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -206,7 +216,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  '/api/search/pharmacy?todofuken={todofuken}&shikuchoson={shikuchoson}':
+  '/api/v1/search/address/pharmacies':
     get:
       tags:
         - 薬局検索
@@ -252,11 +262,11 @@ paths:
                       address_todohuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      first: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      prev: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      next: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      last: http://localhost:3000/api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      prev: null
+                      next: null
+                      last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -266,7 +276,10 @@ paths:
                           tel: '03-5803-1111',
                           url: 'https://www.tokyo-med.ac.jp/',
                           memo_available_time: '平日9:00-17:00',
-
+                          location: {
+                            latitude: 35.707771,
+                            longitude: 139.762519
+                          }
                         }
                       ]
 
@@ -387,6 +400,13 @@ components:
               type: string
             memo_available_time:
               type: string
+            location:
+              type: object
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
 
     Pharmacy:
       description: 薬局の情報
