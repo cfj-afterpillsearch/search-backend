@@ -27,8 +27,19 @@ export class SearchInterceptor implements NestInterceptor {
     }
     return next.handle().pipe(
       tap((data) => {
+        const target = data.links.current.includes('pharmacy')
+          ? 'pharmacy'
+          : data.links.current.includes('medical')
+          ? 'medicalinstitution'
+          : null;
+        const searchLog = {
+          ...data.meta,
+          createdAt: new Date().toISOString(),
+          target,
+        };
+
         // 非同期メソッドではあるが、同期的に実行しなくてよいのでawaitは不要
-        this.statisticsService.sendSearchKeyword(data.meta);
+        this.statisticsService.sendSearchLog(searchLog);
       }),
     );
   }

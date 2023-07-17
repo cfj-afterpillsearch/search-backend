@@ -1,4 +1,4 @@
-export interface MedicalinstitutionStoreModel {
+export interface PharmacyStoreModel {
   _id: {
     $oid: string;
   };
@@ -10,8 +10,9 @@ export interface MedicalinstitutionStoreModel {
   address: string;
   shikuchosonCode: string;
   phone: string;
-  website: string;
   openinghours: string;
+  emergency_contact: string;
+  emergency_contact_phone: string;
   location: {
     type: 'Point';
     coordinates: number[];
