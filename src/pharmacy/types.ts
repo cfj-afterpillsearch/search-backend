@@ -10,8 +10,9 @@ export interface PharmacyStoreModel {
   address: string;
   shikuchosonCode: string;
   phone: string;
-  website: string;
-  available_date: string;
+  openinghours: string;
+  emergency_contact: string;
+  emergency_contact_phone: string;
   location: {
     type: 'Point';
     coordinates: number[];
