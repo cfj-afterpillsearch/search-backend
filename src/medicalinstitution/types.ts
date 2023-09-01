@@ -12,6 +12,8 @@ export interface MedicalinstitutionStoreModel {
   phone: string;
   website: string;
   openinghours: string;
+  isOpenSunday: string;
+  isOpenHoliday: string;
   location: {
     type: 'Point';
     coordinates: number[];

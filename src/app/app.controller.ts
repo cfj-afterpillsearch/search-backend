@@ -29,6 +29,10 @@ export class AppController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
     itemsPerPage: number,
+    @Query('is_open_sunday', new DefaultValuePipe(0), ParseIntPipe)
+    is_open_sunday: number,
+    @Query('is_open_holiday', new DefaultValuePipe(0), ParseIntPipe)
+    is_open_holiday: number,
   ) {
     const { todofuken, shikuchoson } =
       await this.googleGeocodeService.getAddress(latitude, longitude);
@@ -36,6 +40,8 @@ export class AppController {
     const records = await this.miService.searchFromCurrentLocation(
       latitude,
       longitude,
+      is_open_sunday,
+      is_open_holiday,
     );
 
     const totalItems = records.length;
@@ -91,6 +97,8 @@ export class AppController {
           tel: item.phone,
           url: item.website,
           memo_openinghours: item.openinghours,
+          isOpenSunday: item.isOpenSunday,
+          isOpenHoliday: item.isOpenHoliday,
           location: {
             lat: item.location.coordinates[1],
             lng: item.location.coordinates[0],
@@ -108,6 +116,10 @@ export class AppController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
     itemsPerPage: number,
+    @Query('is_open_sunday', new DefaultValuePipe(0), ParseIntPipe)
+    is_open_sunday: number,
+    @Query('is_open_holiday', new DefaultValuePipe(0), ParseIntPipe)
+    is_open_holiday: number,
   ) {
     if (todofuken === '') {
       throw new BadRequestException('todofuken is required');
@@ -116,6 +128,8 @@ export class AppController {
     const records = await this.miService.searchFromAddress(
       todofuken,
       shikuchoson,
+      is_open_sunday,
+      is_open_holiday,
     );
 
     const totalItems = records.length;
@@ -169,6 +183,8 @@ export class AppController {
           tel: item.phone,
           url: item.website,
           memo_openinghours: item.openinghours,
+          isOpenSunday: item.isOpenSunday,
+          isOpenHoliday: item.isOpenHoliday,
           location: {
             lat: item.location.coordinates[1],
             lng: item.location.coordinates[0],

@@ -22,6 +22,8 @@ paths:
         - $ref: '#/components/parameters/latitude'
         - $ref: '#/components/parameters/longitude'
         - $ref: '#/components/parameters/pagination_page'
+        - $ref: '#/components/parameters/is_open_sunday'
+        - $ref: '#/components/parameters/is_open_holiday'
 
       responses:
         '200':
@@ -98,6 +100,8 @@ paths:
           description: 検索したい市区町村
           example: '町田市'
         - $ref: '#/components/parameters/pagination_page'
+        - $ref: '#/components/parameters/is_open_sunday'
+        - $ref: '#/components/parameters/is_open_holiday'
 
       responses:
         '200':
@@ -162,6 +166,7 @@ paths:
         - $ref: '#/components/parameters/latitude'
         - $ref: '#/components/parameters/longitude'
         - $ref: '#/components/parameters/pagination_page'
+        - $ref: '#/components/parameters/has_emergency_contact'
 
       responses:
         '200':
@@ -239,6 +244,7 @@ paths:
           description: 検索したい市区町村
           example: '町田市'
         - $ref: '#/components/parameters/pagination_page'
+        - $ref: '#/components/parameters/has_emergency_contact'
 
       responses:
         '200':
@@ -321,6 +327,39 @@ components:
         type: integer
         minimum: 1
         default: 1
+    
+    is_open_sunday:
+      name: is_open_sunday
+      in: query
+      description: 医療機関の日曜診療の有無
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 2
+        default: 0
+    
+    is_open_holiday:
+      name: is_open_holiday
+      in: query
+      description: 医療機関の祝日診療の有無
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 2
+        default: 0
+
+    has_emergency_contact:
+      name: has_emergency_contact
+      in: query
+      description: 薬局の時間外対応の有無
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 2
+        default: 0 
 
   schemas:
     MetaInfo_CurrentLocaiton:
