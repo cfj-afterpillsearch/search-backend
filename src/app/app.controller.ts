@@ -202,6 +202,8 @@ export class AppController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
     itemsPerPage: number,
+    @Query('is_out_of_hours', new DefaultValuePipe(0), ParseIntPipe)
+    is_out_of_hours: number,
   ) {
     const { todofuken, shikuchoson } =
       await this.googleGeocodeService.getAddress(latitude, longitude);
@@ -209,6 +211,7 @@ export class AppController {
     const records = await this.phaService.searchFromCurrentLocation(
       latitude,
       longitude,
+      is_out_of_hours,
     );
 
     const totalItems = records.length;
@@ -282,6 +285,8 @@ export class AppController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
     itemsPerPage: number,
+    @Query('is_out_of_hours', new DefaultValuePipe(0), ParseIntPipe)
+    is_out_of_hours: number,
   ) {
     if (todofuken === '') {
       throw new BadRequestException('todofuken is required');
@@ -290,6 +295,7 @@ export class AppController {
     const records = await this.phaService.searchFromAddress(
       todofuken,
       shikuchoson,
+      is_out_of_hours,
     );
 
     const totalItems = records.length;
