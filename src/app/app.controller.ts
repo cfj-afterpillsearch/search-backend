@@ -106,7 +106,8 @@ export class AppController {
         };
       });
 
-    return { meta, links, results };
+    // return { meta, links, results };
+    return;
   }
 
   @Get('/api/v1/search/address/medical-institutions')
@@ -192,7 +193,8 @@ export class AppController {
         };
       });
 
-    return { meta, links, results };
+    // return { meta, links, results };
+    return;
   }
 
   @Get('/api/v1/search/current-location/pharmacies')
@@ -275,7 +277,8 @@ export class AppController {
         };
       });
 
-    return { meta, links, results };
+    // return { meta, links, results };
+    return;
   }
 
   @Get('/api/v1/search/address/pharmacies')
@@ -357,6 +360,7 @@ export class AppController {
         };
       });
 
-    return { meta, links, results };
+    // return { meta, links, results };
+    return;
   }
 }
