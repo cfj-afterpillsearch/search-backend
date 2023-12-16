@@ -51,7 +51,7 @@ export class AppController {
       page = 1;
     }
 
-    // perpageパラメータが不正な場合は、20件を返す。 TODO: Pipeで実装する
+    // perpageパラメータが不正な場合は、10件を返す。 TODO: Pipeで実装する
     if (itemsPerPage < 1 || itemsPerPage > 100) {
       itemsPerPage = 10;
     }
