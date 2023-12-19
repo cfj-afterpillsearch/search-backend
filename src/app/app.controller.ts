@@ -27,7 +27,7 @@ export class AppController {
     @Query('latitude', ParseFloatPipe) latitude: number,
     @Query('longitude', ParseFloatPipe) longitude: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
+    @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
     itemsPerPage: number,
     @Query('is_open_sunday', new DefaultValuePipe(0), ParseIntPipe)
     is_open_sunday: number,
@@ -51,9 +51,9 @@ export class AppController {
       page = 1;
     }
 
-    // perpageパラメータが不正な場合は、20件を返す。 TODO: Pipeで実装する
+    // perpageパラメータが不正な場合は、10件を返す。 TODO: Pipeで実装する
     if (itemsPerPage < 1 || itemsPerPage > 100) {
-      itemsPerPage = 20;
+      itemsPerPage = 10;
     }
 
     const meta = {
@@ -114,7 +114,7 @@ export class AppController {
     @Query('todofuken', new DefaultValuePipe('')) todofuken: string,
     @Query('shikuchoson', new DefaultValuePipe('')) shikuchoson: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
+    @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
     itemsPerPage: number,
     @Query('is_open_sunday', new DefaultValuePipe(0), ParseIntPipe)
     is_open_sunday: number,
@@ -139,9 +139,9 @@ export class AppController {
       page = 1;
     }
 
-    // perpageパラメータが不正な場合は、20件を返す。 TODO: Pipeで実装する
+    // perpageパラメータが不正な場合は、10件を返す。 TODO: Pipeで実装する
     if (itemsPerPage < 1 || itemsPerPage > 100) {
-      itemsPerPage = 20;
+      itemsPerPage = 10;
     }
 
     const meta = {
@@ -200,7 +200,7 @@ export class AppController {
     @Query('latitude', ParseFloatPipe) latitude: number,
     @Query('longitude', ParseFloatPipe) longitude: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
+    @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
     itemsPerPage: number,
     @Query('is_out_of_hours', new DefaultValuePipe(0), ParseIntPipe)
     is_out_of_hours: number,
@@ -221,9 +221,9 @@ export class AppController {
       page = 1;
     }
 
-    // perpageパラメータが不正な場合は、20件を返す。 TODO: Pipeで実装する
+    // perpageパラメータが不正な場合は、10件を返す。 TODO: Pipeで実装する
     if (itemsPerPage < 1 || itemsPerPage > 100) {
-      itemsPerPage = 20;
+      itemsPerPage = 10;
     }
 
     const meta = {
@@ -283,7 +283,7 @@ export class AppController {
     @Query('todofuken', new DefaultValuePipe('')) todofuken: string,
     @Query('shikuchoson', new DefaultValuePipe('')) shikuchoson: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('perpage', new DefaultValuePipe(20), ParseIntPipe)
+    @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
     itemsPerPage: number,
     @Query('is_out_of_hours', new DefaultValuePipe(0), ParseIntPipe)
     is_out_of_hours: number,
@@ -305,9 +305,9 @@ export class AppController {
       page = 1;
     }
 
-    // perpageパラメータが不正な場合は、20件を返す。 TODO: Pipeで実装する
+    // perpageパラメータが不正な場合は、10件を返す。 TODO: Pipeで実装する
     if (itemsPerPage < 1 || itemsPerPage > 100) {
-      itemsPerPage = 20;
+      itemsPerPage = 10;
     }
 
     const meta = {
