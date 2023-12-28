@@ -40,7 +40,7 @@ export class MedicalinstitutionService {
     if (is_open_sunday !== 0) {
       queryArray.push({
         $match: {
-          isOpenSunday: is_open_sunday === 1 ? '◯' : '△',
+          isOpenSunday: is_open_sunday === 1 ? '◯' : { $in: ['◯', '△'] },
         },
       });
     }
@@ -48,7 +48,7 @@ export class MedicalinstitutionService {
     if (is_open_holiday !== 0) {
       queryArray.push({
         $match: {
-          isOpenHoliday: is_open_holiday === 1 ? '◯' : '△',
+          isOpenHoliday: is_open_holiday === 1 ? '◯' : { $in: ['◯', '△'] },
         },
       });
     }
@@ -65,8 +65,8 @@ export class MedicalinstitutionService {
     const query = {
       address_todofuken: todofuken,
       address_shikuchoson: shikuchoson,
-      isOpenSunday: is_open_sunday === 1 ? '◯' : '△',
-      isOpenHoliday: is_open_holiday === 1 ? '◯' : '△',
+      isOpenSunday: is_open_sunday === 1 ? '◯' : { $in: ['◯', '△'] },
+      isOpenHoliday: is_open_holiday === 1 ? '◯' : { $in: ['◯', '△'] },
     };
 
     if (is_open_sunday === 0) {
