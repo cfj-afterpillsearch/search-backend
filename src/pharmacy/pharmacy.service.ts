@@ -54,14 +54,17 @@ export class PharmacyService {
   }
 
   async searchFromAddress(
-    todofuken: string,
-    shikuchoson: string,
+    todofuken: string[],
+    shikuchoson: string[],
     is_out_of_hours: number,
   ) {
-    const query =
-      shikuchoson === ''
-        ? { address_todofuken: todofuken }
-        : { address_todofuken: todofuken, address_shikuchoson: shikuchoson };
+    const query: any = {
+      address_todofuken: { $in: todofuken },
+    };
+
+    if (shikuchoson.length > 0 && shikuchoson[0] !== '') {
+      query.address_shikuchoson = { $in: shikuchoson };
+    }
 
     if (is_out_of_hours === 1) {
       query['$and'] = [

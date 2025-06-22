@@ -57,24 +57,25 @@ export class MedicalinstitutionService {
   }
 
   async searchFromAddress(
-    todofuken: string,
-    shikuchoson: string,
+    todofuken: string[],
+    shikuchoson: string[],
     is_open_sunday: number,
     is_open_holiday: number,
   ) {
-    const query = {
-      address_todofuken: todofuken,
-      address_shikuchoson: shikuchoson,
-      isOpenSunday: is_open_sunday === 1 ? '◯' : '△',
-      isOpenHoliday: is_open_holiday === 1 ? '◯' : '△',
+    const query: any = {
+      address_todofuken: { $in: todofuken },
     };
 
-    if (is_open_sunday === 0) {
-      delete query.isOpenSunday;
+    if (shikuchoson.length > 0 && shikuchoson[0] !== '') {
+      query.address_shikuchoson = { $in: shikuchoson };
     }
 
-    if (is_open_holiday === 0) {
-      delete query.isOpenHoliday;
+    if (is_open_sunday !== 0) {
+      query.isOpenSunday = is_open_sunday === 1 ? '◯' : '△';
+    }
+
+    if (is_open_holiday !== 0) {
+      query.isOpenHoliday = is_open_holiday === 1 ? '◯' : '△';
     }
 
     const result = await this.miService.find(query).toArray();

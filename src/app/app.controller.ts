@@ -9,9 +9,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { GoogleGeocodingService } from '../google-geocoding/google-geocoding.service';
-import { MedicalinstitutionService } from 'src/medicalinstitution/medicalinstitution.service';
-import { SearchInterceptor } from 'src/intercepter/search/search.interceptor';
-import { PharmacyService } from 'src/pharmacy/pharmacy.service';
+import { MedicalinstitutionService } from '../medicalinstitution/medicalinstitution.service';
+import { SearchInterceptor } from '../intercepter/search/search.interceptor';
+import { PharmacyService } from '../pharmacy/pharmacy.service';
 
 @UseInterceptors(SearchInterceptor)
 @Controller()
@@ -67,22 +67,15 @@ export class AppController {
       address_todofuken: todofuken,
       address_shikuchoson: shikuchoson,
     };
+
+    const baseUrl = `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}`;
+
     const links = {
-      current: `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}&page=${page}`,
-      first: `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}&page=1`,
-      prev:
-        page > 1
-          ? `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}&page=${
-              page - 1
-            }`
-          : null,
-      next:
-        page < meta.totalPages
-          ? `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}&page=${
-              page + 1
-            }`
-          : null,
-      last: `/api/v1/search/current-location/medical-institutions?latitude=${latitude}&longitude=${longitude}&page=${meta.totalPages}`,
+      current: `${baseUrl}&page=${page}`,
+      first: `${baseUrl}&page=1`,
+      prev: page > 1 ? `${baseUrl}&page=${page - 1}` : null,
+      next: page < meta.totalPages ? `${baseUrl}&page=${page + 1}` : null,
+      last: `${baseUrl}&page=${meta.totalPages}`,
     };
     const results = records
       .slice(
@@ -111,8 +104,10 @@ export class AppController {
 
   @Get('/api/v1/search/address/medical-institutions')
   async searchMedicalInstitution_address(
-    @Query('todofuken', new DefaultValuePipe('')) todofuken: string,
-    @Query('shikuchoson', new DefaultValuePipe('')) shikuchoson: string,
+    @Query('todofuken', new DefaultValuePipe(['']))
+    todofuken: string | string[],
+    @Query('shikuchoson', new DefaultValuePipe(['']))
+    shikuchoson: string | string[],
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
     itemsPerPage: number,
@@ -121,13 +116,21 @@ export class AppController {
     @Query('is_open_holiday', new DefaultValuePipe(0), ParseIntPipe)
     is_open_holiday: number,
   ) {
-    if (todofuken === '') {
+    // todofukenを配列に統一（?todofuken=東京都&todofuken=神奈川県形式に対応）
+    const todofukenArray = Array.isArray(todofuken) ? todofuken : [todofuken];
+
+    if (todofukenArray.length === 0 || todofukenArray[0] === '') {
       throw new BadRequestException('todofuken is required');
     }
 
+    // shikuchosonを配列に統一（?shikuchoson=町田市&shikuchoson=相模原市形式に対応）
+    const shikuchosonArray = Array.isArray(shikuchoson)
+      ? shikuchoson
+      : [shikuchoson];
+
     const records = await this.miService.searchFromAddress(
-      todofuken,
-      shikuchoson,
+      todofukenArray,
+      shikuchosonArray,
       is_open_sunday,
       is_open_holiday,
     );
@@ -150,25 +153,25 @@ export class AppController {
       currentPage: page,
       totalPages: Math.ceil(totalItems / itemsPerPage),
       searchType: 'address',
-      address_todofuken: todofuken,
-      address_shikuchoson: shikuchoson,
+      address_todofuken: todofukenArray.join(','),
+      address_shikuchoson: shikuchosonArray.join(','),
     };
+
+    // リンク生成時に?todofuken=東京都&todofuken=神奈川県形式を使用
+    const todofukenParams = todofukenArray
+      .map((t) => `todofuken=${encodeURIComponent(t)}`)
+      .join('&');
+    const shikuchosonParams = shikuchosonArray
+      .map((s) => `shikuchoson=${encodeURIComponent(s)}`)
+      .join('&');
+    const baseUrl = `/api/v1/search/current-location/medical-institutions?${todofukenParams}&${shikuchosonParams}`;
+
     const links = {
-      current: `/api/v1/search/current-location/medical-institutions?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${page}`,
-      first: `/api/v1/search/current-location/medical-institutions?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=1`,
-      prev:
-        page > 1
-          ? `/api/v1/search/current-location/medical-institutions?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${
-              page - 1
-            }`
-          : null,
-      next:
-        page < meta.totalPages
-          ? `/api/v1/search/current-location/medical-institutions?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${
-              page + 1
-            }`
-          : null,
-      last: `/api/v1/search/current-location/medical-institutions?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${meta.totalPages}`,
+      current: `${baseUrl}&page=${page}`,
+      first: `${baseUrl}&page=1`,
+      prev: page > 1 ? `${baseUrl}&page=${page - 1}` : null,
+      next: page < meta.totalPages ? `${baseUrl}&page=${page + 1}` : null,
+      last: `${baseUrl}&page=${meta.totalPages}`,
     };
     const results = records
       .slice(
@@ -237,22 +240,15 @@ export class AppController {
       address_todofuken: todofuken,
       address_shikuchoson: shikuchoson,
     };
+
+    const baseUrl = `/api/v1/search/current-location/pharmacy?latitude=${latitude}&longitude=${longitude}`;
+
     const links = {
-      current: `/api/v1/search/current-location/pharmacy?latitude=${latitude}&longitude=${longitude}&page=${page}`,
-      first: `/api/v1/search/current-location/pharmacy?latitude=${latitude}&longitude=${longitude}&page=1`,
-      prev:
-        page > 1
-          ? `/api/v1/search/current-location/pharmacy?latitude=${latitude}&longitude=${longitude}&page=${
-              page - 1
-            }`
-          : null,
-      next:
-        page < meta.totalPages
-          ? `/api/v1/search/current-location/pharmacy?latitude=${latitude}&longitude=${longitude}&page=${
-              page + 1
-            }`
-          : null,
-      last: `/api/v1/search/current-location/pharmacy?latitude=${latitude}&longitude=${longitude}&page=${meta.totalPages}`,
+      current: `${baseUrl}&page=${page}`,
+      first: `${baseUrl}&page=1`,
+      prev: page > 1 ? `${baseUrl}&page=${page - 1}` : null,
+      next: page < meta.totalPages ? `${baseUrl}&page=${page + 1}` : null,
+      last: `${baseUrl}&page=${meta.totalPages}`,
     };
     const results = records
       .slice(
@@ -280,21 +276,31 @@ export class AppController {
 
   @Get('/api/v1/search/address/pharmacies')
   async searchPharmacy_address(
-    @Query('todofuken', new DefaultValuePipe('')) todofuken: string,
-    @Query('shikuchoson', new DefaultValuePipe('')) shikuchoson: string,
+    @Query('todofuken', new DefaultValuePipe(['']))
+    todofuken: string | string[],
+    @Query('shikuchoson', new DefaultValuePipe(['']))
+    shikuchoson: string | string[],
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
     itemsPerPage: number,
     @Query('is_out_of_hours', new DefaultValuePipe(0), ParseIntPipe)
     is_out_of_hours: number,
   ) {
-    if (todofuken === '') {
+    // todofukenを配列に統一（?todofuken=東京都&todofuken=神奈川県形式に対応）
+    const todofukenArray = Array.isArray(todofuken) ? todofuken : [todofuken];
+
+    if (todofukenArray.length === 0 || todofukenArray[0] === '') {
       throw new BadRequestException('todofuken is required');
     }
 
+    // shikuchosonを配列に統一（?shikuchoson=町田市&shikuchoson=相模原市形式に対応）
+    const shikuchosonArray = Array.isArray(shikuchoson)
+      ? shikuchoson
+      : [shikuchoson];
+
     const records = await this.phaService.searchFromAddress(
-      todofuken,
-      shikuchoson,
+      todofukenArray,
+      shikuchosonArray,
       is_out_of_hours,
     );
 
@@ -316,25 +322,25 @@ export class AppController {
       currentPage: page,
       totalPages: Math.ceil(totalItems / itemsPerPage),
       searchType: 'address',
-      address_todofuken: todofuken,
-      address_shikuchoson: shikuchoson,
+      address_todofuken: todofukenArray.join(','),
+      address_shikuchoson: shikuchosonArray.join(','),
     };
+
+    // リンク生成時に?todofuken=東京都&todofuken=神奈川県形式を使用
+    const todofukenParams = todofukenArray
+      .map((t) => `todofuken=${encodeURIComponent(t)}`)
+      .join('&');
+    const shikuchosonParams = shikuchosonArray
+      .map((s) => `shikuchoson=${encodeURIComponent(s)}`)
+      .join('&');
+    const baseUrl = `/api/v1/search/current-location/pharmacy?${todofukenParams}&${shikuchosonParams}`;
+
     const links = {
-      current: `/api/v1/search/current-location/pharmacy?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${page}`,
-      first: `/api/v1/search/current-location/pharmacy?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=1`,
-      prev:
-        page > 1
-          ? `/api/v1/search/current-location/pharmacy?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${
-              page - 1
-            }`
-          : null,
-      next:
-        page < meta.totalPages
-          ? `/api/v1/search/current-location/pharmacy?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${
-              page + 1
-            }`
-          : null,
-      last: `/api/v1/search/current-location/pharmacy?todofuken=${todofuken}&shikuchoson=${shikuchoson}&page=${meta.totalPages}`,
+      current: `${baseUrl}&page=${page}`,
+      first: `${baseUrl}&page=1`,
+      prev: page > 1 ? `${baseUrl}&page=${page - 1}` : null,
+      next: page < meta.totalPages ? `${baseUrl}&page=${page + 1}` : null,
+      last: `${baseUrl}&page=${meta.totalPages}`,
     };
     const results = records
       .slice(
