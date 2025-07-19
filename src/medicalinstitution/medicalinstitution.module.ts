@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MedicalinstitutionService } from './medicalinstitution.service';
-import { MongodbClientModule } from 'src/mongodb-client/mongodb-client.module';
+import { MongodbClientModule } from '../mongodb-client/mongodb-client.module';
 import { MONGODB_MEDICALINSTITUTION } from './medicalinstitution.constants';
 import { MongodbClientService } from '../mongodb-client/mongodb-client.service';
 import { MedicalinstitutionStoreModel } from './types';

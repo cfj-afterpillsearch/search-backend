@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PharmacyService } from './pharmacy.service';
 import { MONGODB_PHARMACY } from './pharmacy.constants';
-import { MongodbClientModule } from 'src/mongodb-client/mongodb-client.module';
-import { MongodbClientService } from 'src/mongodb-client/mongodb-client.service';
+import { MongodbClientModule } from '../mongodb-client/mongodb-client.module';
+import { MongodbClientService } from '../mongodb-client/mongodb-client.service';
 import { PharmacyStoreModel } from './types';
 import { Collection } from 'mongodb';
 

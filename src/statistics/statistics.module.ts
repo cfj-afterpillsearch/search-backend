@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
-import { MongodbClientService } from 'src/mongodb-client/mongodb-client.service';
+import { MongodbClientService } from '../mongodb-client/mongodb-client.service';
 import { Collection } from 'mongodb';
 import { MONGODB_SEARCH_STATISTICS } from './statistics.constants';
-import { MongodbClientModule } from 'src/mongodb-client/mongodb-client.module';
+import { MongodbClientModule } from '../mongodb-client/mongodb-client.module';
 
 @Module({
   imports: [MongodbClientModule],
