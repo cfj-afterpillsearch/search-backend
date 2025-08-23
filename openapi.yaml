@@ -50,11 +50,11 @@ paths:
                       address_todofuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/v1/search/current-location/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/v1/search/current-location/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                       prev: null
                       next: null
-                      last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/v1/search/current-location/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
                     results:
                       [
                         {
@@ -89,16 +89,24 @@ paths:
         - in: query
           name: todofuken
           schema:
-            type: string
-          description: 検索したい都道府県
-          example: '東京都'
+            type: array
+            items:
+              type: string
+            style: form
+            explode: true
+          description: 検索したい都道府県（複数指定可能）
+          example: ['東京都', '神奈川県']
           required: true
         - in: query
           name: shikuchoson
           schema:
-            type: string
-          description: 検索したい市区町村
-          example: '町田市'
+            type: array
+            items:
+              type: string
+            style: form
+            explode: true
+          description: 検索したい市区町村（複数指定可能）
+          example: ['町田市', '座間市']
         - $ref: '#/components/parameters/pagination_page'
         - $ref: '#/components/parameters/is_open_sunday'
         - $ref: '#/components/parameters/is_open_holiday'
@@ -123,14 +131,14 @@ paths:
                       currentPage: 1
                       totalPages: 1
                       searchType: address
-                      address_todofuken: '東京都'
-                      address_shikuchoson: '町田市'
+                      address_todofuken: '東京都,神奈川県'
+                      address_shikuchoson: '町田市,座間市'
                     links:
-                      current: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
-                      first: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/v1/search/address/medical-institutions?todofuken=東京都&todofuken=神奈川県&shikuchoson=町田市&shikuchoson=座間市&page=1
+                      first: /api/v1/search/address/api/search/medical-institutions?todofuken=東京都&todofuken=神奈川県&shikuchoson=町田市&shikuchoson=座間市&page=1
                       prev: null
                       next: null
-                      last: /api/search/medical-institutions?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/v1/search/address/medical-institutions?todofuken=東京都&todofuken=神奈川県&shikuchoson=町田市&shikuchoson=座間市&page=1
                     results:
                       [
                         {
@@ -192,8 +200,8 @@ paths:
                       address_todofuken: '東京都'
                       address_shikuchoson: '町田市'
                     links:
-                      current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/v1/search/current-location/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      first: /api/v1/search/current-location/pharmacy?latitude=35.681236&longitude=139.767125&page=1
                       prev: null
                       next: null
                       last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
@@ -232,16 +240,24 @@ paths:
         - in: query
           name: todofuken
           schema:
-            type: string
-          description: 検索したい都道府県
-          example: '東京都'
+            type: array
+            items:
+              type: string
+            style: form
+            explode: true
+          description: 検索したい都道府県（複数指定可能）
+          example: ['東京都', '神奈川県']
           required: true
         - in: query
           name: shikuchoson
           schema:
-            type: string
-          description: 検索したい市区町村
-          example: '町田市'
+            type: array
+            items:
+              type: string
+            style: form
+            explode: true
+          description: 検索したい市区町村（複数指定可能）
+          example: ['町田市', '座間市']
         - $ref: '#/components/parameters/pagination_page'
 
       responses:
@@ -264,14 +280,14 @@ paths:
                       currentPage: 1
                       totalPages: 1
                       searchType: address
-                      address_todofuken: '東京都'
-                      address_shikuchoson: '町田市'
+                      address_todofuken: '東京都,神奈川県'
+                      address_shikuchoson: '町田市,座間市'
                     links:
-                      current: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
-                      first: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      current: /api/v1/search/address/pharmacy?todofuken=東京都&todofuken=神奈川県&shikuchoson=町田市&shikuchoson=座間市&page=1
+                      first: /api/v1/search/address/search/pharmacy?todofuken=東京都&todofuken=神奈川県&shikuchoson=町田市&shikuchoson=座間市&page=1
                       prev: null
                       next: null
-                      last: /api/search/pharmacy?latitude=35.681236&longitude=139.767125&page=1
+                      last: /api/v1/search/address/pharmacy?todofuken=東京都&todofuken=神奈川県&shikuchoson=町田市&shikuchoson=座間市&page=1
                     results:
                       [
                         {
