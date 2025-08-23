@@ -104,9 +104,9 @@ export class AppController {
 
   @Get('/api/v1/search/address/medical-institutions')
   async searchMedicalInstitution_address(
-    @Query('todofuken', new DefaultValuePipe(['']))
+    @Query('todofuken', new DefaultValuePipe([]))
     todofuken: string | string[],
-    @Query('shikuchoson', new DefaultValuePipe(['']))
+    @Query('shikuchoson', new DefaultValuePipe([]))
     shikuchoson: string | string[],
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
@@ -116,10 +116,15 @@ export class AppController {
     @Query('is_open_holiday', new DefaultValuePipe(0), ParseIntPipe)
     is_open_holiday: number,
   ) {
+    // パラメータが空の場合はエラーを返す
+    if (todofuken === '') {
+      throw new BadRequestException('todofuken is required');
+    }
+
     // todofukenを配列に統一（?todofuken=東京都&todofuken=神奈川県形式に対応）
     const todofukenArray = Array.isArray(todofuken) ? todofuken : [todofuken];
 
-    if (todofukenArray.length === 0 || todofukenArray[0] === '') {
+    if (todofukenArray.length === 0) {
       throw new BadRequestException('todofuken is required');
     }
 
@@ -276,9 +281,9 @@ export class AppController {
 
   @Get('/api/v1/search/address/pharmacies')
   async searchPharmacy_address(
-    @Query('todofuken', new DefaultValuePipe(['']))
+    @Query('todofuken', new DefaultValuePipe([]))
     todofuken: string | string[],
-    @Query('shikuchoson', new DefaultValuePipe(['']))
+    @Query('shikuchoson', new DefaultValuePipe([]))
     shikuchoson: string | string[],
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perpage', new DefaultValuePipe(10), ParseIntPipe)
@@ -286,10 +291,15 @@ export class AppController {
     @Query('is_out_of_hours', new DefaultValuePipe(0), ParseIntPipe)
     is_out_of_hours: number,
   ) {
+    // パラメータが空の場合はエラーを返す
+    if (todofuken === '') {
+      throw new BadRequestException('todofuken is required');
+    }
+
     // todofukenを配列に統一（?todofuken=東京都&todofuken=神奈川県形式に対応）
     const todofukenArray = Array.isArray(todofuken) ? todofuken : [todofuken];
 
-    if (todofukenArray.length === 0 || todofukenArray[0] === '') {
+    if (todofukenArray.length === 0) {
       throw new BadRequestException('todofuken is required');
     }
 
